@@ -1,0 +1,8 @@
+/Users/charles/Documents/Codes/C#.net/tenorchem/bin/Debug/netcoreapp1.1/tenorchem.deps.json
+/Users/charles/Documents/Codes/C#.net/tenorchem/bin/Debug/netcoreapp1.1/tenorchem.runtimeconfig.json
+/Users/charles/Documents/Codes/C#.net/tenorchem/bin/Debug/netcoreapp1.1/tenorchem.runtimeconfig.dev.json
+/Users/charles/Documents/Codes/C#.net/tenorchem/bin/Debug/netcoreapp1.1/tenorchem.dll
+/Users/charles/Documents/Codes/C#.net/tenorchem/bin/Debug/netcoreapp1.1/tenorchem.pdb
+/Users/charles/Documents/Codes/C#.net/tenorchem/obj/Debug/netcoreapp1.1/tenorchem.AssemblyInfo.cs
+/Users/charles/Documents/Codes/C#.net/tenorchem/obj/Debug/netcoreapp1.1/tenorchem.dll
+/Users/charles/Documents/Codes/C#.net/tenorchem/obj/Debug/netcoreapp1.1/tenorchem.pdb
