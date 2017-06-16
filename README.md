@@ -2,11 +2,11 @@
 
 This is a project built for a factory for material management. Will have functions as:
 
-1. User authentication
+1. User authentication and authorization.
 
-2. Material type management
+2. Material type management.
 
-3. Material records (daily input)
+3. Material records (daily input).
 
 4. Report generating by types/time periods.
 
