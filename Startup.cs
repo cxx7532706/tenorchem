@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using tenorchem.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 
 namespace tenorchem
 {
@@ -30,6 +33,21 @@ namespace tenorchem
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminPolicy", policyBuilder =>
+                {
+                    policyBuilder.RequireAuthenticatedUser()
+                        .RequireAssertion(context => context.User.HasClaim("Admin", "true"))
+                        .Build();
+                });
+                options.AddPolicy("NormalPolicy", policyBuilder =>
+                {
+                    policyBuilder.RequireAuthenticatedUser()
+                        .RequireAssertion(context => context.User.HasClaim("Normal", "true"))
+                        .Build();
+                });
+            });
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=./TenorchemDB.db"));
             services.AddMvc();
         }
@@ -39,6 +57,14 @@ namespace tenorchem
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "Cookies",
+                LoginPath = new PathString("/User/Login"),
+                AccessDeniedPath = new PathString("/Home/PermissionDenied"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
 
             if (env.IsDevelopment())
             {
@@ -56,7 +82,7 @@ namespace tenorchem
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=User}/{action=Login}/{id?}");
             });
         }
     }

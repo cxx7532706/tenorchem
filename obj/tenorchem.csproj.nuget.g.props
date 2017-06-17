@@ -13,6 +13,7 @@
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
   </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)sqlite/3.13.0/build/net45/SQLite.props" Condition="Exists('$(NuGetPackageRoot)sqlite/3.13.0/build/net45/SQLite.props')" />
     <Import Project="$(NuGetPackageRoot)microsoft.diasymreader.native/1.4.1/build/Microsoft.DiaSymReader.Native.props" Condition="Exists('$(NuGetPackageRoot)microsoft.diasymreader.native/1.4.1/build/Microsoft.DiaSymReader.Native.props')" />
   </ImportGroup>
 </Project>

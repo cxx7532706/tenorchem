@@ -2,7 +2,7 @@
 
 This is a project built for a factory for material management. Will have functions as:
 
-1. User authentication and authorization.
+1. User authentication and authorization using Claim-based authorization.
 
 2. Material type management.
 

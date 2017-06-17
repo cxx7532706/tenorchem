@@ -1,4 +1,5 @@
 using System;
+using System.Security.Claims;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using tenorchem.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.Authentication;
 
 namespace tenorchem.Controllers
 {
@@ -18,7 +21,76 @@ namespace tenorchem.Controllers
             _context = context;    
         }
 
+
+        public IActionResult Login(){
+            var name = HttpContext.User.Identity.Name;
+            // if jumped from other page(user does not logged in)
+            var s = Request.Query["ReturnUrl"];
+            if (s.Count != 0) {
+                ViewData.Add("displayMessage","loginWarn");
+            }
+            else ViewData.Add("displayMessage","false");
+            s = Request.Query["Pass"];
+            if (s.Count !=0 ){
+                ViewData["displayMessage"]="passWrongWarn";
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(int id, string passWord){
+            // Select User from database.
+            var user = await _context.Users.SingleOrDefaultAsync(m => (m.id == id));
+            // if user exist, create authenticate in cookie.
+            if (user.passWord == passWord)
+            {
+                if (user.isAdmin){
+                    var claims = new List<Claim>
+                    {
+                        new Claim("Admin", "true"),
+                        new Claim(ClaimTypes.Name, "admin"),
+                        new Claim(ClaimTypes.Sid, user.id.ToString())
+                    };
+                    var claimsIdentity = new ClaimsIdentity(claims, "Admin");
+                    var claimsPrinciple = new ClaimsPrincipal(claimsIdentity);
+                    await HttpContext.Authentication.SignInAsync("Cookies", claimsPrinciple,
+                        new AuthenticationProperties
+                        {
+                            IsPersistent = true
+                        }
+                    );
+                    return Redirect("/Home/index");
+                }
+                else{
+                    var claims = new List<Claim>
+                    {
+                        new Claim("Normal", "true"),
+                        new Claim(ClaimTypes.Name, "normal"),
+                        new Claim(ClaimTypes.Sid, user.id.ToString())
+                    };
+                    var claimsIdentity = new ClaimsIdentity(claims, "Normal");
+                    var claimsPrinciple = new ClaimsPrincipal(claimsIdentity);
+                    await HttpContext.Authentication.SignInAsync("Cookies", claimsPrinciple,
+                        new AuthenticationProperties
+                        {
+                            IsPersistent = true
+                        }
+                    );
+                    return Redirect("/Home/index");
+                }
+
+            }
+            return Redirect("/User/Login?Pass=0");
+        }
+
+        public async Task<IActionResult> Logout(){
+
+            await HttpContext.Authentication.SignOutAsync("Cookies");
+           return Redirect("/User/Login");
+        }
+
         // GET: User
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());

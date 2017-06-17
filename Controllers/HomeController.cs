@@ -31,5 +31,8 @@ namespace tenorchem.Controllers
         {
             return View();
         }
+        public IActionResult PermissionDenied(){
+            return View();
+        }
     }
 }
