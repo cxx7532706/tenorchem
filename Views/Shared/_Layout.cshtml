@@ -42,8 +42,10 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (role == null){
                         <li><a asp-area="" asp-controller="User" asp-action="Login">用户登录</a></li>
-                    }else {
-                    <li><a asp-area="" asp-controller="User" asp-action="Logout">退出登录</a></li>
+                    }else{
+                        var claims = Context.User.Claims;
+                        <span class="navbar-text">欢迎你，@claims.ElementAt(3).Value</span>
+                        <li><a asp-area="" asp-controller="User" asp-action="Logout">退出登录</a></li>
                     }
                 </ul>
             }

@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http.Authentication;
 
 namespace tenorchem.Controllers
 {
+    [Authorize(Policy = "AdminPolicy")]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,9 +22,10 @@ namespace tenorchem.Controllers
             _context = context;    
         }
 
-
+        [AllowAnonymous]
         public IActionResult Login(){
             var name = HttpContext.User.Identity.Name;
+
             // if jumped from other page(user does not logged in)
             var s = Request.Query["ReturnUrl"];
             if (s.Count != 0) {
@@ -37,6 +39,7 @@ namespace tenorchem.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(int id, string passWord){
             // Select User from database.
@@ -49,7 +52,8 @@ namespace tenorchem.Controllers
                     {
                         new Claim("Admin", "true"),
                         new Claim(ClaimTypes.Name, "admin"),
-                        new Claim(ClaimTypes.Sid, user.id.ToString())
+                        new Claim(ClaimTypes.Sid, user.id.ToString()),
+                        new Claim("username",user.userName)
                     };
                     var claimsIdentity = new ClaimsIdentity(claims, "Admin");
                     var claimsPrinciple = new ClaimsPrincipal(claimsIdentity);
@@ -66,7 +70,8 @@ namespace tenorchem.Controllers
                     {
                         new Claim("Normal", "true"),
                         new Claim(ClaimTypes.Name, "normal"),
-                        new Claim(ClaimTypes.Sid, user.id.ToString())
+                        new Claim(ClaimTypes.Sid, user.id.ToString()),
+                        new Claim("username",user.userName)
                     };
                     var claimsIdentity = new ClaimsIdentity(claims, "Normal");
                     var claimsPrinciple = new ClaimsPrincipal(claimsIdentity);
@@ -82,7 +87,7 @@ namespace tenorchem.Controllers
             }
             return Redirect("/User/Login?Pass=0");
         }
-
+        [AllowAnonymous]
         public async Task<IActionResult> Logout(){
 
             await HttpContext.Authentication.SignOutAsync("Cookies");
@@ -90,7 +95,6 @@ namespace tenorchem.Controllers
         }
 
         // GET: User
-        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users.ToListAsync());
