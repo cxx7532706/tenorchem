@@ -115,11 +115,9 @@
             <text>
                 var pDate = new Date(@item.PurchaseDate.ToString("yyyy,MM-1,dd"));
                 var sDate = new Date(begin);
+                sDate.setTime(sDate.getTime() + sDate.getTimezoneOffset()*60*1000);
                 var eDate = new Date(end);
-                console.log(sDate == pDate);
-                console.log(sDate);
-                console.log(pDate);
-                console.log(pDate == eDate);
+                eDate.setTime(eDate.getTime() + eDate.getTimezoneOffset()*60*1000);
             if(pDate >= sDate && pDate <= eDate)
             {
                 var comment = new String("@item.comment");
@@ -127,7 +125,7 @@
                 var supplierName = new String("@item.Supplier.SupplierName");
 
                 rows.push({
-                    Date: "@item.PurchaseDate",
+                    Date: "@item.PurchaseDate.ToString("yyyy-MM-dd")",
                     Price: @item.PricePerTon,
                     Quantity: @item.Quantity,
                     TotalPrice: @item.TotalPaidPrice,
@@ -152,7 +150,7 @@
                 var supplierName = new String("@item.Supplier.SupplierName");
 
                 rows.push({
-                    Date: "@item.PurchaseDate",
+                    Date: "@item.PurchaseDate.ToString("yyyy-MM-dd")",
                     Price: @item.PricePerTon,
                     Quantity: @item.Quantity,
                     TotalPrice: @item.TotalPaidPrice,
