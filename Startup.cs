@@ -53,10 +53,11 @@ namespace tenorchem
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ApplicationDbContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationScheme = "Cookies",
@@ -77,6 +78,8 @@ namespace tenorchem
             }
 
             app.UseStaticFiles();
+                        
+            DbInitializer.Initialize(context);
 
             app.UseMvc(routes =>
             {
@@ -84,6 +87,8 @@ namespace tenorchem
                     name: "default",
                     template: "{controller=User}/{action=Login}/{id?}");
             });
+
+            
         }
     }
 }

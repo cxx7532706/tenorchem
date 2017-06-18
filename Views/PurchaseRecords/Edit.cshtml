@@ -1,0 +1,89 @@
+@model tenorchem.Models.PurchaseRecord
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>PurchaseRecord</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="PurchaseRecordId" />
+        <div class="form-group">
+            <label asp-for="SupplierId" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+                <span asp-validation-for="SupplierId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PurchaseDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PurchaseDate" class="form-control" />
+                <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PricePerTon" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PricePerTon" class="form-control" />
+                <span asp-validation-for="PricePerTon" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Quantity" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TotalPaidPrice" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TotalPaidPrice" class="form-control" />
+                <span asp-validation-for="TotalPaidPrice" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="PaidBackPerTon" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PaidBackPerTon" class="form-control" />
+                <span asp-validation-for="PaidBackPerTon" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TotalPaidBack" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TotalPaidBack" class="form-control" />
+                <span asp-validation-for="TotalPaidBack" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="comment" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="comment" class="form-control" />
+                <span asp-validation-for="comment" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductId" class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

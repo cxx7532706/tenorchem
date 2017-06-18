@@ -1,0 +1,77 @@
+@model tenorchem.Models.PurchaseRecord
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>PurchaseRecord</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <input type="hidden" asp-for="PurchaseRecordId" />
+        <dt>
+            @Html.DisplayNameFor(model => model.PurchaseDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PricePerTon)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PricePerTon)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPaidPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPaidPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaidBackPerTon)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaidBackPerTon)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalPaidBack)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalPaidBack)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.comment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.comment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Product)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.SupplierName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </form>
+</div>
