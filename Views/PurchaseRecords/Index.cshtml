@@ -9,41 +9,50 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table" data-toggle="table" data-search="true" data-sort-name="Date">
+
+<table id="table" class="table" data-toggle="table" data-search="true" data-sort-name="Date">
+    <div class="form-inline text-center">
+        <label>开始日期</label>
+        <input type="date" id="startDate">
+        <label>结束日期</label>
+        <input type="date" id="endDate">
+        <button id="searchButton" class="btn btn-default">查找范围内数据</button>
+        <button id="recoverButton" class="btn btn-default">显示所有数据</button>
+    </div>
     <thead>
         <tr>
                 <th style data-field="Date" data-sortable="true">
                     @Html.DisplayNameFor(model => model.PurchaseDate)
                 </th>
-                <th style data-sortable="true">
+                <th style data-field="Price" data-sortable="true">
                     @Html.DisplayNameFor(model => model.PricePerTon)
                 </th>
-                <th style data-sortable="true">
+                <th style data-field="Quantity" data-sortable="true">
                     @Html.DisplayNameFor(model => model.Quantity)
                 </th>
                 <th style data-field="TotalPrice" data-sortable="true">
                     @Html.DisplayNameFor(model => model.TotalPaidPrice)
                 </th>
-                <th style data-sortable="true">
+                <th style data-field="PaidBackPrice" data-sortable="true">
                     @Html.DisplayNameFor(model => model.PaidBackPerTon)
                 </th>
-                <th style data-sortable="true">
+                <th style data-field="PaidBackTotal" data-sortable="true">
                     @Html.DisplayNameFor(model => model.TotalPaidBack)
                 </th>
-                <th>
+                <th style data-field="Comment">
                     @Html.DisplayNameFor(model => model.comment)
                 </th>
-            <th style data-sortable="true">
+            <th style data-field="Product" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Product)
             </th>
-            <th style data-sortable="true">
+            <th style data-field="Supplier" data-sortable="true">
                 @Html.DisplayNameFor(model => model.Supplier)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.PurchaseDate)
@@ -81,6 +90,81 @@
                 <a asp-action="Delete" asp-route-id="@item.PurchaseRecordId">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
+
+<script>
+    var $table = $('#table'), $searchButton = $('#searchButton'), $revocerButton = $('#recoverButton');
+    
+    $(function(){
+        $searchButton.click(function(){
+            $table.bootstrapTable('load',filterData());
+        });
+        $revocerButton.click(function(){
+            $table.bootstrapTable('load',allData());
+        });
+    });
+
+    function filterData(){
+        var begin = $('#startDate').val(), end = $('#endDate').val();
+        var rows = [];
+        @foreach (var item in Model){
+            
+            
+            <text>
+                var pDate = new Date(@item.PurchaseDate.ToString("yyyy,MM-1,dd"));
+                var sDate = new Date(begin);
+                var eDate = new Date(end);
+                console.log(sDate == pDate);
+                console.log(sDate);
+                console.log(pDate);
+                console.log(pDate == eDate);
+            if(pDate >= sDate && pDate <= eDate)
+            {
+                var comment = new String("@item.comment");
+                var s = new String("@item.Product.Name" + "(" + "@item.Product.Purity" + ")");
+                var supplierName = new String("@item.Supplier.SupplierName");
+
+                rows.push({
+                    Date: "@item.PurchaseDate",
+                    Price: @item.PricePerTon,
+                    Quantity: @item.Quantity,
+                    TotalPrice: @item.TotalPaidPrice,
+                    PaidBackPrice: @item.PaidBackPerTon,
+                    PaidBackTotal: @item.TotalPaidBack,
+                    Comment: comment,
+                    Product: s,
+                    Supplier: supplierName
+                });
+            }
+            </text>
+        }
+        return rows;
+    }
+
+    function allData(){
+        var rows = [];
+        @foreach (var item in Model){
+            <text>
+                var comment = new String("@item.comment");
+                var s = new String("@item.Product.Name" + "(" + "@item.Product.Purity" + ")");
+                var supplierName = new String("@item.Supplier.SupplierName");
+
+                rows.push({
+                    Date: "@item.PurchaseDate",
+                    Price: @item.PricePerTon,
+                    Quantity: @item.Quantity,
+                    TotalPrice: @item.TotalPaidPrice,
+                    PaidBackPrice: @item.PaidBackPerTon,
+                    PaidBackTotal: @item.TotalPaidBack,
+                    Comment: comment,
+                    Product: s,
+                    Supplier: supplierName
+
+                });
+            </text>
+        }
+        return rows;
+    }    
+</script>
