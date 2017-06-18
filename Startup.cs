@@ -57,7 +57,7 @@ namespace tenorchem
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            
+
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationScheme = "Cookies",
@@ -85,7 +85,7 @@ namespace tenorchem
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=User}/{action=Login}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
 
             

@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using tenorchem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace tenorchem.Controllers
 {
+    [Authorize]
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -125,6 +127,9 @@ namespace tenorchem.Controllers
 
             var product = await _context.Products
                 .SingleOrDefaultAsync(m => m.ProductId == id);
+            if (_context.PurchaseRecords.Where(m => m.ProductId == id).Count() == 0){
+                ViewData["CanBeDelete"] = "true";
+            }
             if (product == null)
             {
                 return NotFound();

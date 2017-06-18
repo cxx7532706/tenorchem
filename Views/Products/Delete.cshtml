@@ -34,8 +34,13 @@
     
     <form asp-action="Delete">
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
+            @if (ViewData["CanBeDelete"] == "true"){
+                <input type="submit" value="Delete" class="btn btn-default" />
+             }
+             else{
+                 <span style="color: red;">无法删除该产品，产品已有对应采购记录</span>
+             }
+            | <a asp-action="Index">Back to List</a>
         </div>
     </form>
 </div>

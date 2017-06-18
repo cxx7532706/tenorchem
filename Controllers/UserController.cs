@@ -44,6 +44,7 @@ namespace tenorchem.Controllers
         public async Task<IActionResult> Login(int id, string passWord){
             // Select User from database.
             var user = await _context.Users.SingleOrDefaultAsync(m => (m.id == id));
+            if (user == null) return Redirect("/User/Login?Pass=0");
             // if user exist, create authenticate in cookie.
             if (user.passWord == passWord)
             {

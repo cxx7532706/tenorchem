@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using tenorchem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace tenorchem.Controllers
 {
+    [Authorize]
     public class PurchaseRecordsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -48,6 +50,7 @@ namespace tenorchem.Controllers
         // GET: PurchaseRecords/Create
         public IActionResult Create()
         {
+            // Make DropDown List in View show Product Name and Purity.
             var products = _context.Products;
             foreach (var product in products){
                 product.Name = product.Name +'('+ product.Purity+')';

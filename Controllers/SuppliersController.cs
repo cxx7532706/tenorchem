@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using tenorchem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace tenorchem.Controllers
 {
+    [Authorize]
     public class SuppliersController : Controller
     {
         private readonly ApplicationDbContext _context;

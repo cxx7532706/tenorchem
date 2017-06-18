@@ -9,34 +9,34 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" data-toggle="table" data-search="true" data-sort-name="Date">
     <thead>
         <tr>
-                <th>
+                <th style data-field="Date" data-sortable="true">
                     @Html.DisplayNameFor(model => model.PurchaseDate)
                 </th>
-                <th>
+                <th style data-sortable="true">
                     @Html.DisplayNameFor(model => model.PricePerTon)
                 </th>
-                <th>
+                <th style data-sortable="true">
                     @Html.DisplayNameFor(model => model.Quantity)
                 </th>
-                <th>
+                <th style data-field="TotalPrice" data-sortable="true">
                     @Html.DisplayNameFor(model => model.TotalPaidPrice)
                 </th>
-                <th>
+                <th style data-sortable="true">
                     @Html.DisplayNameFor(model => model.PaidBackPerTon)
                 </th>
-                <th>
+                <th style data-sortable="true">
                     @Html.DisplayNameFor(model => model.TotalPaidBack)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.comment)
                 </th>
-            <th>
+            <th style data-sortable="true">
                 @Html.DisplayNameFor(model => model.Product)
             </th>
-            <th>
+            <th style data-sortable="true">
                 @Html.DisplayNameFor(model => model.Supplier)
             </th>
             <th></th>
@@ -67,7 +67,10 @@
                 @Html.DisplayFor(modelItem => item.comment)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
+                @{
+                    string s = item.Product.Name+ "(" + item.Product.Purity+ ")";
+                }
+                @s
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Supplier.SupplierName)

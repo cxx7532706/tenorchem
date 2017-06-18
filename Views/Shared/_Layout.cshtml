@@ -32,8 +32,10 @@
             @{  var role = Context.User.Identity.Name;
                 @if(role!= null){
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Products" asp-action="Index">原料品类管理</a></li>
+                    <li><a asp-area="" asp-controller="Suppliers" asp-action="Index">供应商管理</a></li>
+                    <li><a asp-area="" asp-controller="PurchaseRecords" asp-action="Create">录入采购记录</a></li>
+                    <li><a asp-area="" asp-controller="PurchaseRecords" asp-action="Index">浏览采购记录</a></li>
                     @if(role == "admin"){
                         <li><a asp-area="" asp-controller="User" asp-action="Index">系统用户管理</a></li>
                     }
@@ -64,6 +66,14 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <!--Bootstrap-table -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+        <!-- Latest compiled and minified Locales -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -79,6 +89,14 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+        <!-- Latest compiled and minified Locales -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)
