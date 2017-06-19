@@ -12,10 +12,10 @@ namespace tenorchem.Models
         public DbSet<Supplier> Suppliers {get; set;}
         public DbSet<PurchaseRecord> PurchaseRecords {get; set;}
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Filename=./TenorchemDB.db");
-        }
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        // {
+        // //    optionsBuilder.UseSqlite("Filename=./TenorchemDB.db");
+        // }
 
     }
 }

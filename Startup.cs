@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace tenorchem
 {
@@ -48,7 +49,8 @@ namespace tenorchem
                         .Build();
                 });
             });
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=./TenorchemDB.db"));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=./TenorchemDB.db"));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
         }
 
