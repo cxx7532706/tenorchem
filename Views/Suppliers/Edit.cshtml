@@ -4,11 +4,10 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>编辑供应商</h2>
 
 <form asp-action="Edit">
     <div class="form-horizontal">
-        <h4>Supplier</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="SupplierId" />
@@ -17,6 +16,27 @@
             <div class="col-md-10">
                 <input asp-for="SupplierName" class="form-control" />
                 <span asp-validation-for="SupplierName" class="text-danger"></span>
+            </div>
+        </div>
+                <div class="form-group">
+            <label asp-for="Contactor" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Contactor" class="form-control" />
+                <span asp-validation-for="Contactor" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ContactNumber" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ContactNumber" class="form-control" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
@@ -28,13 +48,13 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="保存" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">返回</a>
 </div>
 

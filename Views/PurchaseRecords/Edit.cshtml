@@ -4,86 +4,95 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>编辑采购记录</h2>
 
-<form asp-action="Edit">
+<form asp-action="Edit" id="myForm">
     <div class="form-horizontal">
-        <h4>PurchaseRecord</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="PurchaseRecordId" />
         <div class="form-group">
-            <label asp-for="SupplierId" class="control-label col-md-2"></label>
+            <label asp-for="ProductId" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
-                <span asp-validation-for="SupplierId" class="text-danger"></span>
+                <select asp-for="ProductId" class ="form-control" asp-items="ViewBag.ProductId"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="SupplierId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="SupplierId" class ="form-control" asp-items="ViewBag.SupplierId"></select>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="PurchaseDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="PurchaseDate" class="form-control" />
+                <input asp-for="PurchaseDate" class="form-control" type="date" />
                 <span asp-validation-for="PurchaseDate" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="PricePerTon" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="PricePerTon" class="form-control" />
+                <input asp-for="PricePerTon" id="pricePerTon" class="form-control" type="number" placeholder="必填，没有则填‘0’" />
                 <span asp-validation-for="PricePerTon" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Quantity" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="TotalPaidPrice" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="TotalPaidPrice" class="form-control" />
-                <span asp-validation-for="TotalPaidPrice" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="PaidBackPerTon" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="PaidBackPerTon" class="form-control" />
+                <input asp-for="PaidBackPerTon" id="paidBackPerTon" class="form-control" type="number" placeholder="必填，没有则填‘0’"/>
                 <span asp-validation-for="PaidBackPerTon" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Quantity" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Quantity" id="quantity" class="form-control" type="number" placeholder="必填，没有则填‘0’"/>
+                <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="TotalPaidBack" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="TotalPaidBack" class="form-control" />
+                <input asp-for="TotalPaidBack" id="totalPaidBack" class="form-control" type="number" placeholder="必填，没有则填‘0’"/>
                 <span asp-validation-for="TotalPaidBack" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="TotalPaidPrice" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="TotalPaidPrice" id="totalPrice" class="form-control" type="number" placeholder="必填，没有则填‘0’"/>
+                <span asp-validation-for="TotalPaidPrice" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
             <label asp-for="comment" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="comment" class="form-control" />
+                <input asp-for="comment" class="form-control" placeholder="选填"/>
                 <span asp-validation-for="comment" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="ProductId" class="control-label col-md-2"></label>
-            <div class="col-md-10">
-                <select asp-for="ProductId" class="form-control" asp-items="ViewBag.ProductId"></select>
-                <span asp-validation-for="ProductId" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="保存" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">返回</a>
 </div>
+
+<script>
+    $("#myForm :input").change(function(){
+        var tonPrice = $("#pricePerTon").val();
+        var paidBackTonPrice = $("#paidBackPerTon").val();
+        var quan = $("#quantity").val();
+        var totalPayBack = paidBackTonPrice * quan;
+        var totalPrice = tonPrice * quan - totalPayBack;
+        $("#totalPaidBack").val(totalPayBack);
+        $("#totalPrice").val(totalPrice);
+    });
+</script>
 

@@ -55,7 +55,7 @@ namespace tenorchem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SupplierId,SupplierName,Comment")] Supplier supplier)
+        public async Task<IActionResult> Create([Bind("SupplierId,Contactor,ContactNumber,Address,SupplierName,Comment")] Supplier supplier)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace tenorchem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SupplierId,SupplierName,Comment")] Supplier supplier)
+        public async Task<IActionResult> Edit(int id, [Bind("SupplierId,Contactor,ContactNumber,Address,SupplierName,Comment")] Supplier supplier)
         {
             if (id != supplier.SupplierId)
             {
@@ -127,6 +127,10 @@ namespace tenorchem.Controllers
 
             var supplier = await _context.Suppliers
                 .SingleOrDefaultAsync(m => m.SupplierId == id);
+
+            if (_context.PurchaseRecords.Where(m => m.SupplierId == id).Count() == 0){
+                ViewData["CanBeDelete"] = "true";
+            }
             if (supplier == null)
             {
                 return NotFound();

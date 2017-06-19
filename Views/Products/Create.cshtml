@@ -4,11 +4,10 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<h2>添加新产品</h2>
 
 <form asp-action="Create">
     <div class="form-horizontal">
-        <h4>Product</h4>
         <hr />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
@@ -21,7 +20,7 @@
         <div class="form-group">
             <label asp-for="Purity" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="Purity" class="form-control" />
+                <input asp-for="Purity" class="form-control"  placeholder="例如：90%" />
                 <span asp-validation-for="Purity" class="text-danger"></span>
             </div>
         </div>
@@ -34,13 +33,13 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="添加" class="btn btn-default" />
             </div>
         </div>
     </div>
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">返回</a>
 </div>
 
