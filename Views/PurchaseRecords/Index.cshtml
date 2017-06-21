@@ -4,46 +4,40 @@
     ViewData["Title"] = "Index";
 }
 <br>
-<h2 class="text-center">采购记录浏览</h2>
+<h2 class="text-center">Purchase Records</h2>
 <br>
 <table id="table" class="table" data-toggle="table" data-search="true" data-sort-name="Date" data-sort-order="desc" data-pagination="true" data-page-size="35">
     <div class="form-inline text-center">
-        <label>开始日期</label>
+        <label>Start Date</label>
         <input type="date" id="startDate">
-        <label>结束日期</label>
+        <label>End Date</label>
         <input type="date" id="endDate">
-        <button id="searchButton" class="btn btn-default">查找范围内数据</button>
-        <button id="recoverButton" class="btn btn-default">显示所有数据</button>
-        <button id="exportButton" class="btn btn-default">导出到Excel</button>
+        <button id="searchButton" class="btn btn-default">Filter By Date Period</button>
+        <button id="recoverButton" class="btn btn-default">Remove Filter</button>
+        <button id="exportButton" class="btn btn-default">Export to Excel</button>
     </div>
     <thead>
         <tr>
                 <th style data-field="Date" data-sortable="true">
-                    @Html.DisplayNameFor(model => model.PurchaseDate)
+                    PurchaseDate
                 </th>
                 <th style data-field="Product" data-sortable="true">
-                    采购产品
+                    Product
                 </th>
                 <th style data-field="Supplier" data-sortable="true">
-                    供货商
+                    Supplier
                 </th>
                 <th style data-field="Price" data-sortable="true">
-                    @Html.DisplayNameFor(model => model.PricePerTon)
-                </th>
-                <th style data-field="PaidBackPrice" data-sortable="true">
-                    @Html.DisplayNameFor(model => model.PaidBackPerTon)
+                    Unit Price
                 </th>
                 <th style data-field="Quantity" data-sortable="true">
-                    @Html.DisplayNameFor(model => model.Quantity)
-                </th>
-                <th style data-field="PaidBackTotal" data-sortable="true">
-                    @Html.DisplayNameFor(model => model.TotalPaidBack)
+                    Quantity
                 </th>
                 <th style data-field="TotalPrice" data-sortable="true">
-                    @Html.DisplayNameFor(model => model.TotalPaidPrice)
+                    Total Price
                 </th>
                 <th style data-field="Comment">
-                    @Html.DisplayNameFor(model => model.comment)
+                    Entra Information
                 </th>
 
             <th style data-field="Functions"></th>
@@ -68,14 +62,8 @@
                 @Html.DisplayFor(modelItem => item.PricePerTon)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PaidBackPerTon)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>            
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPaidBack)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPaidPrice)
             </td>
@@ -83,8 +71,8 @@
                 @Html.DisplayFor(modelItem => item.comment)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PurchaseRecordId">编辑记录</a> |
-                <a asp-action="Delete" asp-route-id="@item.PurchaseRecordId">删除记录</a>
+                <a asp-action="Edit" asp-route-id="@item.PurchaseRecordId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.PurchaseRecordId">Delete</a>
             </td>
         </tr>
     }
@@ -128,16 +116,14 @@
                 var recordId = new String("@item.PurchaseRecordId");
 
                 var funcString =
-                    '<a href="/PurchaseRecords/Edit/' + recordId + '">编辑记录</a> | ' +
-                    '<a href="/PurchaseRecords/Delete/' + recordId + '">删除记录</a>';
+                    '<a href="/PurchaseRecords/Edit/' + recordId + '">Edit</a> | ' +
+                    '<a href="/PurchaseRecords/Delete/' + recordId + '">Delete</a>';
 
                 rows.push({
                     Date: "@item.PurchaseDate.ToString("yyyy-MM-dd")",
                     Price: @item.PricePerTon,
                     Quantity: @item.Quantity,
                     TotalPrice: @item.TotalPaidPrice,
-                    PaidBackPrice: @item.PaidBackPerTon,
-                    PaidBackTotal: @item.TotalPaidBack,
                     Comment: comment,
                     Product: s,
                     Supplier: supplierName,
@@ -159,16 +145,14 @@
                 var recordId = new String("@item.PurchaseRecordId");
 
                 var funcString =
-                    '<a href="/PurchaseRecords/Edit/' + recordId + '">编辑记录</a> | ' +
-                    '<a href="/PurchaseRecords/Delete/' + recordId + '">删除记录</a>';
+                    '<a href="/PurchaseRecords/Edit/' + recordId + '">Edit</a> | ' +
+                    '<a href="/PurchaseRecords/Delete/' + recordId + '">Delete</a>';
 
                 rows.push({
                     Date: "@item.PurchaseDate.ToString("yyyy-MM-dd")",
                     Price: @item.PricePerTon,
                     Quantity: @item.Quantity,
                     TotalPrice: @item.TotalPaidPrice,
-                    PaidBackPrice: @item.PaidBackPerTon,
-                    PaidBackTotal: @item.TotalPaidBack,
                     Comment: comment,
                     Product: s,
                     Supplier: supplierName,

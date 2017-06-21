@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - 天健原料管理系统</title>
+    <title>@ViewData["Title"] - Records Management System</title>
 
 
     <environment names="Development">
@@ -22,7 +22,7 @@
         <!--Table Export -->
         <script type="text/javascript" src="~/lib/table-export/FileSaver.min.js"></script>
         <script type="text/javascript" src="~/lib/table-export/xlsx.core.min.js"></script>
-        <script type="text/javascript" src="~/lib/table-export/tableExport.min.js"></script>
+        <!-- <script type="text/javascript" src="~/lib/table-export/tableExport.min.js"></script> -->
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -45,7 +45,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
 
         <!-- Latest compiled and minified Locales -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+      <!--  <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script> -->
 
         <!--Table Export -->
         <script type="text/javascript" src="~/lib/table-export/FileSaver.min.js"></script>
@@ -66,9 +66,7 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
-</head>
-<body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -77,34 +75,36 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">天健原料管理系统</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Records Management System</a>
             </div>
             <div class="navbar-collapse collapse">
             @{  var role = Context.User.Identity.Name;
                 @if(role!= null){
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Products" asp-action="Index">原料品类管理</a></li>
-                    <li><a asp-area="" asp-controller="Suppliers" asp-action="Index">供应商管理</a></li>
-                    <li><a asp-area="" asp-controller="PurchaseRecords" asp-action="Create">录入采购记录</a></li>
-                    <li><a asp-area="" asp-controller="PurchaseRecords" asp-action="Index">浏览采购记录</a></li>
+                    <li><a asp-area="" asp-controller="Products" asp-action="Index">Products</a></li>
+                    <li><a asp-area="" asp-controller="Suppliers" asp-action="Index">Suppliers</a></li>
+                    <li><a asp-area="" asp-controller="PurchaseRecords" asp-action="Create">New Records</a></li>
+                    <li><a asp-area="" asp-controller="PurchaseRecords" asp-action="Index">View Records</a></li>
                     @if(role == "admin"){
-                        <li><a asp-area="" asp-controller="User" asp-action="Index">系统用户管理</a></li>
+                        <li><a asp-area="" asp-controller="User" asp-action="Index">User management</a></li>
                     }
                 </ul>
                 }
                 <ul class="nav navbar-nav navbar-right">
                     @if (role == null){
-                        <li><a asp-area="" asp-controller="User" asp-action="Login">用户登录</a></li>
+                        <li><a asp-area="" asp-controller="User" asp-action="Login">Login</a></li>
                     }else{
                         var claims = Context.User.Claims;
-                        <span class="navbar-text">欢迎你，@claims.ElementAt(3).Value</span>
-                        <li><a asp-area="" asp-controller="User" asp-action="Logout">退出登录</a></li>
+                        <span class="navbar-text">Welcome, @claims.ElementAt(3).Value</span>
+                        <li><a asp-area="" asp-controller="User" asp-action="Logout">Logout</a></li>
                     }
                 </ul>
             }
             </div>
         </div>
     </nav>
+</head>
+<body>
     <div class="container body-content">
         @RenderBody()
         <hr />

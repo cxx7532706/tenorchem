@@ -5,67 +5,67 @@
 
 @{    var role = Context.User.Identity.Name;
     <div class="container page-header center">
-        <h1 class="text-center">欢迎使用天健原料管理系统</h1>
+        <h1 class="text-center">Welcome to Tenor Records Management System</h1>
         @if(role == "admin"){
             <div class="container col-md-4">
             <br>
-            <h3 class="row text-center">用户管理</h3>
+            <h3 class="row text-center">User Management</h3>
             <br>
             <div class="text-center">
                 <span style="font-size:7.5em;" class="glyphicon glyphicon-user text-center" aria-hidden="true"></span>
             </div>
             <br>
             <div class="text-center">
-                <a class="btn btn-default btn-lg" href="/User/index" role="button">前往用户管理</a>
+                <a class="btn btn-default btn-lg" href="/User/index" role="button">Access the Users</a>
             </div>
             </div>
         }
         <div class="container col-md-4">
             <br>
-            <h3 class="row text-center">原料品类管理</h3>
+            <h3 class="row text-center">Products Management</h3>
             <br>
             <div class="text-center">
                 <span style="font-size:7.5em;" class="glyphicon glyphicon-book text-center" aria-hidden="true"></span>
             </div>
             <br>
             <div class="text-center">
-                <a class="btn btn-default btn-lg" href="/Products/index" role="button">前往原料品类管理</a>
+                <a class="btn btn-default btn-lg" href="/Products/index" role="button">Access the Products</a>
             </div>
         </div>
         <div class="container col-md-4">
             <br>
-            <h3 class="row text-center">供应商管理</h3>
+            <h3 class="row text-center">Suppliers Management</h3>
             <br>
             <div class="text-center">
                 <span style="font-size:7.5em;" class="glyphicon glyphicon-file text-center" aria-hidden="true"></span>
             </div>
             <br>
             <div class="text-center">
-                <a class="btn btn-default btn-lg" href="/Suppliers/index" role="button">前往供应商管理</a>
+                <a class="btn btn-default btn-lg" href="/Suppliers/index" role="button">Access the Suppliers</a>
             </div>
         </div>
         <div class="container col-md-4">
             <br>
-            <h3 class="row text-center">原料采购</h3>
+            <h3 class="row text-center">Create Purchase Record</h3>
             <br>
             <div class="text-center">
                 <span style="font-size:7.5em;" class="glyphicon glyphicon-pencil text-center" aria-hidden="true"></span>
             </div>
             <br>
             <div class="text-center">
-                <a class="btn btn-default btn-lg" href="/PurchaseRecords/create" role="button">录入原料采购记录</a>
+                <a class="btn btn-default btn-lg" href="/PurchaseRecords/create" role="button">Create New Record</a>
             </div>
         </div>
         <div class="container col-md-4">
             <br>
-            <h3 class="row text-center">记录管理</h3>
+            <h3 class="row text-center">Records Management</h3>
             <br>
             <div class="text-center">
                 <span style="font-size:7.5em;" class="glyphicon glyphicon-list-alt text-center" aria-hidden="true"></span>
             </div>
             <br>
             <div class="text-center">
-                <a class="btn btn-default btn-lg" href="/PurchaseRecords/index" role="button">浏览采购记录及生成报表</a>
+                <a class="btn btn-default btn-lg" href="/PurchaseRecords/index" role="button">Access all records</a>
             </div>
         </div>
     </div>
